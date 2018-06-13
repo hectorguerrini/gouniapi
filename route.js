@@ -5,4 +5,8 @@ module.exports = function(app) {
   // todoList Routes
   app.route('/gouniapi/')
     .get(list.home);
+  app.route('/gouniapi/updateUsuario')
+    .post(list.updateUsuario);
+  app.route('/gouniapi/loginUsuario')
+    .post(list.loginUsuario);
 };
