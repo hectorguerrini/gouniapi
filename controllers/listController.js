@@ -1,7 +1,7 @@
 var config = require('../config')
 var sql = require('mssql')
 
-
+/*
 sql.connect(config,function(err) {
   if (err) {
     console.error("error connecting: " + err.stack);
@@ -9,7 +9,7 @@ sql.connect(config,function(err) {
   }
   console.log("connected ");
 });
-
+*/
 
 exports.home = function (req, res) {
   res.json({json:'work'});
@@ -26,18 +26,28 @@ exports.updateUsuario = function(req, res) {
   query +=" ,@TIPO='"+req.body.tipo +"'";
   
 
-  var conn = new sql.Request();
-  conn.query(query, function(error, result) {
-    if (error) {
-      console.dir(error);
+  sql.connect(config,function(err) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+      return;
     }
+    console.log("query: ",query);
+    var conn = new sql.Request();
+    conn.query(query, function(error, result) {
+      if (error) {
+        console.dir(error);
+      } 
 
-    if (result.recordset.length > 0) {   
-      res.json({ message: true, string: query, jsonRetorno: result.recordset });
-    } else {
-      res.json({ message: false, string: query, jsonRetorno: [] });
-    }
+      if (result.recordset.length > 0) {   
+        res.json({ message: true, string: query, jsonRetorno: result.recordset });
+      } else {
+        res.json({ message: false, string: query, jsonRetorno: [] });
+      }
+      sql.close();
+    });
+    
   });
+  
 };
 
 exports.loginUsuario = function(req, res) {
@@ -59,4 +69,36 @@ exports.loginUsuario = function(req, res) {
     }
   });
 };
+
+exports.listaUniversidades = function(req, res){
+ 
+  var query = " EXEC sp_gou_get_universidades ";
+  query +=" @NOME='"+req.body.nome +"'";
+  
+
+
+  sql.connect(config,function(err) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+      return;
+    }
+    console.log("query: ",query);
+    var conn = new sql.Request();
+    conn.query(query, function(error, result) {
+      if (error) {
+        console.dir(error);
+      } 
+
+      if (result) {   
+        res.json({ string: query, jsonRetorno: result.recordset });
+      } else {
+        res.json({ string: query, jsonRetorno: []});
+      }
+      sql.close();
+    });
+    
+  });
+
+
+}
 

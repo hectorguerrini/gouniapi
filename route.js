@@ -9,4 +9,6 @@ module.exports = function(app) {
     .post(list.updateUsuario);
   app.route('/gouniapi/loginUsuario')
     .post(list.loginUsuario);
+  app.route('/gouniapi/listaUniversidades')
+    .post(list.listaUniversidades);
 };
