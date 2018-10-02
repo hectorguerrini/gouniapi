@@ -1,6 +1,16 @@
 var config = require('../config')
 var sql = require('mssql')
-
+const configPool = {
+  user: 'node',
+  password: 'nodeadmin',
+  server: 'localhost', // You can use 'localhost\\instance' to connect to named instance
+  database: 'DBGouni',
+  pool: {
+      max: 10,
+      min: 0,
+      idleTimeoutMillis: 30000
+  }
+}
 /*
 sql.connect(config,function(err) {
   if (err) {
@@ -10,6 +20,7 @@ sql.connect(config,function(err) {
   console.log("connected ");
 });
 */
+
 function queryDB (query, callback ){
   sql.connect(config,function(err) {
     if (err) {
@@ -33,7 +44,31 @@ function queryDB (query, callback ){
   });
 
 };
+exports.executeQuery = function (query) {
+  return new Promise((resolve, reject) => {
 
+
+    const pool = new sql.ConnectionPool(configPool, function (err) {
+      if (err) {
+        console.error("error connecting: " + err.stack);
+        reject();
+      }
+      console.log("query: ", query);
+      var conn = new sql.Request(pool);
+      conn.query(query, function (error, result) {
+        
+        if (error) {
+          console.dir(error);
+          reject();
+        } else {
+          resolve(result.recordset);
+        }
+
+      });
+
+    });
+  })
+}
 
 exports.home = function (req, res) {
   res.json({json:'work'});
