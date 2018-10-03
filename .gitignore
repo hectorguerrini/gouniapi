@@ -2,3 +2,4 @@ iisnode/
 .vscode/
 *.xls
 *.xlsx
+Web.config
