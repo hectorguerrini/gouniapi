@@ -1,17 +1,11 @@
 {
   "name": "webapp",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "\"webApi Gouni\"",
   "main": "./server.js",
   "author": "Hector",
   "license": "ISC",
   "engines": {
     "node": "6.3.0"
-  },
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
-    "mssql": "^4.1.0",
-    "request": "^2.85.0"
   }
 }
