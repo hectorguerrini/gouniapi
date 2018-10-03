@@ -1,9 +1,9 @@
 var express = require('express');
 
-var graphqlHTTP = require('express-graphql');
+//var graphqlHTTP = require('express-graphql');
 //var { buildSchema } = require('graphql');
 
-const schema = require('./graphql/universidade.js');
+//const schema = require('./graphql/universidade.js');
 
 var bodyParser = require('body-parser');
 var app = express();
@@ -22,10 +22,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/gouniapi/graphql', graphqlHTTP({
-    schema: schema,
-    graphiql: true
-}));
+// app.use('/gouniapi/graphql', graphqlHTTP({
+//     schema: schema,
+//     graphiql: true
+// }));
 
 
 var routes = require('./route'); //importing route
