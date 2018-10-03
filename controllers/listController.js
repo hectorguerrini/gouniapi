@@ -1,12 +1,12 @@
 var config = require('../config')
 var sql = require('mssql')
 const configPool = {
-  user: 'node',
-  password: 'nodeadmin',
-  server: 'localhost', // You can use 'localhost\\instance' to connect to named instance
+  user: 'gouniadmin',
+  password: 'Luka1523',
+  server: 'gouni.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
   database: 'DBGouni',
   pool: {
-      max: 10,
+      max: 20,
       min: 0,
       idleTimeoutMillis: 30000
   }
@@ -22,25 +22,24 @@ sql.connect(config,function(err) {
 */
 
 function queryDB (query, callback ){
-  sql.connect(config,function(err) {
+  const pool = new sql.ConnectionPool(configPool, function (err) {
     if (err) {
       console.error("error connecting: " + err.stack);
       callback(true);
-      return;
     }
-    console.log("query: ",query);
-    var conn = new sql.Request();
-    conn.query(query, function(error, result) {
-      sql.close();
+    console.log("query: ", query);
+    var conn = new sql.Request(pool);
+    conn.query(query, function (error, result) {
+      
       if (error) {
         console.dir(error);
         callback(true);
-      }else{ 
-        callback(false,result.recordset)
+      } else {
+        callback(false,result.recordset);
       }
-          
+
     });
-    
+
   });
 
 };
