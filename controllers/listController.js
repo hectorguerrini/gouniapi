@@ -3,8 +3,11 @@ var sql = require('mssql')
 const configPool = {
   user: 'gouniadmin',
   password: 'Luka1523',
-  server: 'gouni.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
+  server: 'gounidb.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
   database: 'DBGouni',
+  options: {
+    encrypt: true // Use this if you're on Windows Azure
+  },
   pool: {
       max: 20,
       min: 0,
