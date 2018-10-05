@@ -74,6 +74,7 @@ exports.executeQuery = function (query) {
 
 exports.home = function (req, res) {
   res.json({json:'work'});
+  
 };
 
 exports.updateUsuario = function(req, res) {
