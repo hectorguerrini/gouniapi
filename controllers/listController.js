@@ -74,7 +74,7 @@ exports.executeQuery = function (query) {
 
 exports.home = function (req, res) {
   res.json({json:'work'});
-  
+
 };
 
 exports.updateUsuario = function(req, res) {
@@ -194,12 +194,12 @@ exports.updateAvaliacao = function(req, res) {
     @ID_USUARIO=${req.params.user}
     ,@ID=${req.body.id}
     ,@AVAL=${req.body.Geral}
-    ${req.body.Limpeza ? `,@LIMPEZA='${req.body.Limpeza}'`: '' }
-    ${req.body.Professores ? `,@PROFESSORES='${req.body.Professores}'`: '' }
-    ${req.body.Instalacoes ? `,@INSTALACOES='${req.body.Instalacoes}'`: '' }
-    ${req.body.Estacionamento ? `,@ESTACIONAMENTO='${req.body.Estacionamento}'`: '' }
-    ${req.body.Lanchonetes ? `,@LANCHONETES='${req.body.Lanchonetes}'`: '' }
-    ${req.body.Ensino ? `,@ENSINO='${req.body.Ensino}'`: '' }
+    ${req.body.Limpeza ? `,@LIMPEZA=${req.body.Limpeza}`: '' }
+    ${req.body.Professores ? `,@PROFESSORES=${req.body.Professores}`: '' }
+    ${req.body.Instalacoes ? `,@INSTALACOES=${req.body.Instalacoes}`: '' }
+    ${req.body.Estacionamento ? `,@ESTACIONAMENTO=${req.body.Estacionamento}`: '' }
+    ${req.body.Lanchonetes ? `,@LANCHONETES=${req.body.Lanchonetes}`: '' }
+    ${req.body.Ensino ? `,@ENSINO=${req.body.Ensino}`: '' }
     ${req.body.Comment ? `,@COMENTARIO='${req.body.Comment}'`: '' }
     `;
    
