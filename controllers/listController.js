@@ -192,7 +192,7 @@ exports.updateAvaliacao = function(req, res) {
   }
   var query = ` EXEC ${proc} 
     @ID_USUARIO=${req.params.user}
-    ,@ID=${req.body.id}
+    ,@ID=${req.params.id}
     ,@AVAL=${req.body.Geral}
     ${req.body.Limpeza ? `,@LIMPEZA=${req.body.Limpeza}`: '' }
     ${req.body.Professores ? `,@PROFESSORES=${req.body.Professores}`: '' }
