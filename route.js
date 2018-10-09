@@ -19,4 +19,6 @@ module.exports = function(app) {
     .post(list.getCurso);
   app.route('/gouniapi/avaliacao/:tipo/:user')
     .post(list.updateAvaliacao);
+  app.route('/gouniapi/compare/universidade/:curso')
+    .post(list.compareUniversidades);
 };

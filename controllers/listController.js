@@ -1,19 +1,19 @@
-var config = require('../config')
+const configPool = require('../config')();
 var sql = require('mssql')
-const configPool = {
-  user: 'gouniadmin',
-  password: 'Luka1523',
-  server: 'gounidb.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
-  database: 'DBGouni',
-  options: {
-    encrypt: true // Use this if you're on Windows Azure
-  },
-  pool: {
-      max: 20,
-      min: 0,
-      idleTimeoutMillis: 30000
-  }
-}
+// const configPool = {
+//   user: 'gouniadmin',
+//   password: 'Luka1523',
+//   server: 'gounidb.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
+//   database: 'DBGouni',
+//   options: {
+//     encrypt: true // Use this if you're on Windows Azure
+//   },
+//   pool: {
+//       max: 20,
+//       min: 0,
+//       idleTimeoutMillis: 30000
+//   }
+// }
 /*
 sql.connect(config,function(err) {
   if (err) {
@@ -211,4 +211,16 @@ exports.updateAvaliacao = function(req, res) {
     res.json({string: query, jsonRetorno: result });    
   })
 };
+exports.compareUniversidades = function(req, res){
+  var query = ` EXEC sp_gou_get_universidade_comparacao @ID_CURSO='${req.params.curso}', @IDS_UNIS='${req.body.ids}'`;
+  
+  queryDB(query, (err, result) => {
+    if(err){
+      console.dir(err);
+      return;
+    }    
+  
+    res.json({string: query, jsonRetorno: result });    
+  })
+}
 
