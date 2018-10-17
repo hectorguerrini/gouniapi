@@ -200,7 +200,9 @@ exports.updateAvaliacao = function(req, res) {
     ${req.body.ensino ? `,@ENSINO=${req.body.ensino}`: '' }
     ${req.body.materiais ? `,@MATERIAIS=${req.body.materiais}`: '' }
     ${req.body.conteudo ? `,@CONTEUDO='${req.body.conteudo}'`: '' }
-    ${req.body.comment ? `,@COMENTARIO='${req.body.comment}'`: '' }    
+    ${req.body.comentario ? `,@COMENTARIO='${req.body.comentario}'`: '' }    
+    ${req.body.titulo ? `,@TITULO='${req.body.titulo}'`: '' }    
+    ${req.body.mensalidade ? `,@MENSALIDADE='${req.body.mensalidade.replace('R$ ','')}'`: '' }    
     `;
    
   queryDB(query, (err, result) => {
