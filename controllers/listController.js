@@ -189,8 +189,8 @@ exports.updateAvaliacao = function(req, res) {
  
   var query = ` EXEC sp_gou_update_avaliacao 
     @ID_USUARIO=${req.params.user}
-    ,@ID_UNI=${req.body.universidade}
-    ,@ID_CURSO=${req.body.curso}
+    ,@ID_UNI=${req.body.id_universidade}
+    ,@ID_CURSO=${req.body.id_curso}
     ,@GERAL=${req.body.geral}
     ${req.body.limpeza ? `,@LIMPEZA=${req.body.limpeza}`: '' }
     ${req.body.professores ? `,@PROFESSORES=${req.body.professores}`: '' }
@@ -215,6 +215,20 @@ exports.updateAvaliacao = function(req, res) {
 };
 exports.compareUniversidades = function(req, res){
   var query = ` EXEC sp_gou_get_universidade_comparacao @ID_CURSO='${req.params.curso}', @IDS_UNIS='${req.body.ids}'`;
+  
+  queryDB(query, (err, result) => {
+    if(err){
+      console.dir(err);
+      return;
+    }    
+  
+    res.json({string: query, jsonRetorno: result });    
+  })
+}
+exports.getCombo = function(req, res){
+  var query = ` EXEC sp_gou_get_combo @COMBO='${req.params.combo}'
+    ${req.body.id ? `,@ID='${req.body.id}'`: '' }
+    `;
   
   queryDB(query, (err, result) => {
     if(err){

@@ -21,4 +21,6 @@ module.exports = function(app) {
     .post(list.updateAvaliacao);
   app.route('/gouniapi/compare/universidade/:curso')
     .post(list.compareUniversidades);
+  app.route('/gouniapi/combo/:combo')
+    .post(list.getCombo);
 };
