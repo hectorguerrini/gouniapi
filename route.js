@@ -23,4 +23,6 @@ module.exports = function(app) {
     .post(list.compareUniversidades);
   app.route('/gouniapi/combo/:combo')
     .post(list.getCombo);
+  app.route('/gouniapi/detalhes/:id_uni/:id_curso')
+    .get(list.getDetalhes);
 };

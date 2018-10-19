@@ -240,3 +240,24 @@ exports.getCombo = function(req, res){
   })
 }
 
+exports.getDetalhes = function(req, res){
+  var query = ` EXEC sp_gou_get_detalhes @ID_CURSO='${req.params.id_curso}' ,@ID_UNI=${req.params.id_uni}  `;
+  var query2 = ` EXEC sp_gou_get_detalhes_comentarios @ID_CURSO='${req.params.id_curso}' ,@ID_UNI=${req.params.id_uni}`
+  queryDB(query, (err, result) => {
+    if(err){
+      console.dir(err);
+      return;
+    }    
+   
+    var r = result;
+    queryDB(query2, (err, result) => {
+      if(err){
+        console.dir(err);
+        return;
+      }    
+      r[0].comentarios = result
+      res.json({string: query, jsonRetorno: r });    
+    })  
+    
+  })
+}
