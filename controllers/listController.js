@@ -140,7 +140,7 @@ exports.getUniversidade = function(req, res){
   var query = ` EXEC sp_gou_get_detalhe_universidade @ID=${req.params.id}
     ${req.params.user ? `,@ID_USUARIO=${req.params.user}` : ''}`;
   // query +=" @ID='"+req.params.id +"'";
-  var query2 = ` EXEC sp_gou_get_detalhe_universidade_curso @ID=${req.params.id}
+  var query2 = ` EXEC sp_gou_get_detalhe_universidade_curso @ID=${req.params.id},@ORDER=${req.body.order}
   ${req.params.user ? `,@ID_USUARIO=${req.params.user}` : ''}`;
   queryDB(query, (err, result) => {
     if(err){
@@ -164,7 +164,7 @@ exports.getCurso = function(req, res){
  
   var query = ` EXEC sp_gou_get_detalhe_curso @ID=${req.params.id}
     ${req.params.user ? `,@ID_USUARIO=${req.params.user}` : ''}`;
-  var query2 = ` EXEC sp_gou_get_detalhe_curso_universidade @ID=${req.params.id} 
+  var query2 = ` EXEC sp_gou_get_detalhe_curso_universidade @ID=${req.params.id},@ORDER=${req.body.order}
     ${req.params.user ? `,@ID_USUARIO=${req.params.user}` : ''}`;
   queryDB(query, (err, result) => {
     if(err){
